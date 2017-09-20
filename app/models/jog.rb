@@ -1,0 +1,2 @@
+class Jog < ApplicationRecord
+end

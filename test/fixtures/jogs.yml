@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  start_at: 2017-09-20 18:53:53
+  distance: 9.99
+  duration: 9.99
+
+two:
+  user_id: 1
+  start_at: 2017-09-20 18:53:53
+  distance: 9.99
+  duration: 9.99
