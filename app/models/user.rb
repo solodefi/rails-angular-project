@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  enum type: ["Regular", "User Manager", "Administrator"]
+  enum user_type: ["regular", "user_manager", "administrator"]
 end

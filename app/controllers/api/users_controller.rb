@@ -2,6 +2,10 @@ class Api::UsersController < ApiController
   respond_to :json
   skip_before_action :restrict_access, :only => [:create]
 
+  # def index
+  #   respond_with :api, @user.jogs.all
+  # end
+
   def create
     respond_to do |format|
       format.json {
@@ -15,9 +19,17 @@ class Api::UsersController < ApiController
     end
   end
 
-  private
+  # def update
 
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :type)
-  end
+  #   respond_with :api, @user.jogs.update(params[:id], jog_params)
+  # end
+
+  # def destroy
+  #   respond_with :api, @user.jogs.destroy(params[:id])
+  # end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :user_type)
+    end
 end
