@@ -1,0 +1,10 @@
+<div ng-controller='CreateUsersController as vm' class="row col-xs-12 col-md-6">
+  <form name="form" ng-submit="form.$valid && vm.create()">
+    <div class="col-xs-3">
+      <email-form form="form" model="vm.newUser"></email-form>
+    </div>
+    <div class="col-xs-3">
+      <password-form form="form" model="vm.newUser" include-confirmation="false"></password-form>
+    </div>
+  </form>
+</div>

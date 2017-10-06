@@ -1,0 +1,12 @@
+<div ng-controller="GenericFormController as vm" class="form-group" ng-class="vm.error('email')">
+  <label class="form-label" for="email">Email</label>
+
+  <div class="controls">
+    <input id="email" name="email" type="email" ng-model="model.email" placeholder="Email" required/>
+
+    <div class="help-block" ng-show="form.email.$invalid && form.email.$dirty"
+         ng-messages="form.email.$error">
+         	<div ng-messages-include="angular/common/_ng-messages.html"></div>
+     </div>
+  </div>
+</div>

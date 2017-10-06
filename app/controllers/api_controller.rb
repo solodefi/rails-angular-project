@@ -7,7 +7,7 @@ class ApiController < ActionController::Base
   def restrict_access
     authenticate_or_request_with_http_token do |token, options|
       @token = token
-      ApiToken.exists?(api_token: @token)
+      ApiToken.exists?(token: @token)
     end
   end
 end

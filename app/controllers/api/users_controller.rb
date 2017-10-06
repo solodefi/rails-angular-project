@@ -2,9 +2,9 @@ class Api::UsersController < ApiController
   respond_to :json
   skip_before_action :restrict_access, :only => [:create]
 
-  # def index
-  #   respond_with :api, @user.jogs.all
-  # end
+  def index
+    respond_with :api, User.all
+  end
 
   def create
     respond_to do |format|
@@ -19,14 +19,14 @@ class Api::UsersController < ApiController
     end
   end
 
-  # def update
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+  end
 
-  #   respond_with :api, @user.jogs.update(params[:id], jog_params)
-  # end
-
-  # def destroy
-  #   respond_with :api, @user.jogs.destroy(params[:id])
-  # end
+  def destroy
+    User.destroy(params[:id])
+  end
 
   private
     def user_params

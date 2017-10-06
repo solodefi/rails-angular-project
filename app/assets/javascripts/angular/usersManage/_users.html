@@ -1,0 +1,72 @@
+<div ng-controller="UsersController as vm">
+
+
+  <div class="panel panel-default col-xs-12">
+
+    <div class="row panel-heading">
+      <div class="col-xs-3">
+        Email
+      </div>
+      <div class="col-xs-3">
+        Password
+      </div>
+      <div ng-if = "vm.user_type === 'administrator' " class="col-xs-3">
+        User Type
+      </div>
+
+      <div class="col-xs-3">
+        <button ng-click="vm.new()" type="button" class="btn btn-success">
+          New
+        </button>
+      </div>
+    </div>
+
+    <ul class="list-group">
+
+      <span ng-if="vm.newUser">
+        <li class="list-group-item row">
+          <form name="form" class="form-inline" ng-submit="vm.create()">
+            <user-form usertype="vm.user_type" form="form" user="vm.newUser"></user-form>
+            <div class="col-xs-3">
+              <button ng-click="vm.newCancel()" class="btn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </li>
+      </span>
+
+      <li ng-repeat="user in vm.users|userRange:vm.user_type"
+          class="list-group-item row">
+
+          <span ng-if="user != vm.editedUserMarker">
+            <div class="col-xs-3">
+              {{ user.email }}
+            </div>
+            <div class="col-xs-3">
+               ******* 
+            </div>
+            <div ng-if = "vm.user_type === 'administrator' " class="col-xs-3">
+              {{ user.user_type }}
+            </div>
+            <div class="col-xs-3">
+              <button ng-if = "vm.user_type === 'administrator' " ng-click="vm.editJog(user)" type="button" class="btn"><i class="glyphicon glyphicon-eye-open"></i></button>
+              <button ng-click="vm.edit(user)" type="button" class="btn"><i class="glyphicon glyphicon-pencil"></i></button>
+              <button confirmed-click="vm.destroy(user)" confirm-click="Are you sure?" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
+              </button>
+            </div>
+          </span>
+
+          <span ng-if="user == vm.editedUserMarker">
+            <form  name="editform" class="form-inline" ng-submit="vm.update()">
+              <user-form usertype="vm.user_type" form="editform" user="vm.clonedUser"></user-form>
+              <div class="col-xs-3">
+                <button ng-click="vm.editCancel()" class="btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </span>
+
+      </li> <!-- end ng-repeat -->
+    </ul>
+  </div> <!-- end panel -->
+</div>

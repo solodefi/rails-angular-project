@@ -1,0 +1,108 @@
+<div ng-controller="JogsController as vm">
+
+  <h3>Jogs</h3>
+
+  <div class = "row" style="margin-bottom: 10px;">
+    <div class="col-xs-3">
+      <span class="dropdown" is-open="dropdownOpen">
+        <div class="input-group" data-toggle = "dropdown" id = "timepickdrop1">
+          <input type="datetime" datetime-converter class="form-control" data-ng-model="vm.fromDate" required>
+          <span class="input-group-addon"></span>
+        </div>
+        <ul class="dropdown-menu">
+          <datetimepicker datetime-converter data-ng-model="vm.fromDate" data-datetimepicker-config="{ dropdownSelector: '#timepickdrop1' }"/>
+        </ul>
+      </span>
+    </div>
+    <div class="col-xs-3">
+      <span class="dropdown" is-open="dropdownOpen">
+        <div class="input-group" data-toggle = "dropdown" id = "timepickdrop2">
+          <input type="datetime" datetime-converter class="form-control" data-ng-model="vm.toDate" required>
+          <span class="input-group-addon"></span>
+        </div>
+        <ul class="dropdown-menu">
+          <datetimepicker datetime-converter data-ng-model="vm.toDate" data-datetimepicker-config="{ dropdownSelector: '#timepickdrop2' }"/>
+        </ul>
+      </span>
+    </div>
+    <div class="col-xs-1">
+      <button class="btn btn-default" ng-model="vm.rangeDescriptor" ng-click="vm.rangeDescriptor='custom'">Filter</button>
+    </div>
+    <div class="col-xs-1">
+      <button class="btn btn-default" ng-model="vm.rangeDescriptor" ng-click="vm.rangeDescriptor='all'">Reset</button>
+    </div>
+  </div>
+
+  <div class="panel panel-default col-xs-12">
+
+    <div class="row panel-heading">
+      <div class="col-xs-3">
+        Start Time
+      </div>
+      <div class="col-xs-2">
+        Distance (Miles)
+      </div>
+      <div class="col-xs-2">
+        Time (Hours)
+      </div>
+      <div class="col-xs-2">
+        Average speed (mph)
+      </div>
+      <div class="col-xs-3">
+        <button ng-click="vm.new()" type="button" class="btn btn-success">
+          New
+        </button>
+      </div>
+    </div>
+
+    <ul class="list-group">
+
+      <span ng-if="vm.newJog">
+        <li class="list-group-item row">
+          <form class="form-inline" ng-submit="vm.create()">
+            <jog-form jog="vm.newJog"></jog-form>
+            <div class="col-xs-3">
+              <button ng-click="vm.newCancel()" class="btn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </li>
+      </span>
+
+      <li ng-repeat="jog in vm.jogs | dateRange:'start_at':vm.rangeDescriptor:vm.fromDate:vm.toDate | orderBy: '-start_at'"
+          class="list-group-item row">
+
+          <span ng-if="jog != vm.editedJogMarker">
+            <div class="col-xs-3">
+              {{ jog.start_at | date: 'short' }}
+            </div>
+            <div class="col-xs-2">
+              {{ jog.distance | number : 2 }}
+            </div>
+            <div class="col-xs-2">
+              {{ jog.duration | number : 2 }}
+            </div>
+            <div class="col-xs-2">
+              {{ jog.distance / jog.duration | number : 2 }}
+            </div>
+            <div class="col-xs-3">
+              <button ng-click="vm.edit(jog)" type="button" class="btn"><i class="glyphicon glyphicon-pencil"></i></button>
+              <button confirmed-click="vm.destroy(jog)" confirm-click="Are you sure?" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
+              </button>
+            </div>
+          </span>
+
+          <span ng-if="jog == vm.editedJogMarker">
+            <form class="form-inline" ng-submit="vm.update()">
+              <jog-form jog="vm.clonedJog"></jog-form>
+              <div class="col-xs-3">
+                <button ng-click="vm.editCancel()" class="btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </span>
+
+      </li> <!-- end ng-repeat -->
+    </ul>
+  </div> <!-- end panel -->
+</div>

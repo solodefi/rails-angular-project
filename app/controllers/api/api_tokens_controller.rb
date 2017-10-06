@@ -4,13 +4,18 @@ class Api::ApiTokensController < ApiController
   skip_before_action :restrict_access, :only => [:create]
 
   def create
-    authenticated_user = User.find_by_email(login_params[:email]).authenticate(login_params[:password])
+    searched_user = User.find_by_email(login_params[:email])
+    if searched_user
+       authenticated_user = searched_user.authenticate(login_params[:password])
+    end
     respond_to do |format|
       format.json {
         if authenticated_user
           @api_token = ApiToken.create(user: authenticated_user)
+          puts "token create"
+          puts authenticated_user.user_type
           render :json => {
-            :user_id => authenticated_user.id, :email => authenticated_user.email, :api_token => @api_token.api_token
+            :user_id => authenticated_user.id, :email => authenticated_user.email, :token => @api_token.token, :user_type => authenticated_user.user_type
           }
         else
           head :unauthorized
@@ -20,7 +25,7 @@ class Api::ApiTokensController < ApiController
   end
 
   def destroy
-    authenticated_user = ApiToken.where(:api_token => @token).first.try(:user)
+    authenticated_user = ApiToken.where(:token => @token).first.try(:user)
     if (authenticated_user)
       authenticated_user.api_tokens.destroy_all
     end

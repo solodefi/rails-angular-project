@@ -1,0 +1,22 @@
+<div ng-controller='LoginController as vm' class="row col-xs-12 col-md-6">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Login</h3>
+    </div>
+
+    <div class="panel-body">
+
+      <form name="form" ng-submit="vm.login()">
+        <email-form form="form" model="vm.credentials"></email-form>
+        <password-form form="form" model="vm.credentials" include-confirmation="false"></password-form>
+        <button ng-disabled="form.$invalid" class="btn btn-primary" type="submit">Login</button>
+        <a ui-sref="createUser">Or create a user, if you do not have one already.</a>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-0 col-md-6"></div>

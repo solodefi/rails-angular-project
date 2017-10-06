@@ -26,6 +26,6 @@ class Api::JogsController < ApiController
     end
 
     def jog_params
-      params.require(:jog).permit(:start_time, :user_id, :distance_in_miles, :time_in_hours)
+      params.require(:jog).permit(:start_at, :user_id, :distance, :duration)
     end
 end

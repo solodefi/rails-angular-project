@@ -1,0 +1,37 @@
+<div ng-controller="GenericFormController as vm" class="form-group">
+
+  <div class="form-group" ng-class="vm.error('password')">
+    <label class="form-label" for="password">Password</label>
+
+    <div class="controls">
+      <input id="password" name="password" type="password" minlength='6' ng-model="model.password"
+             placeholder="Password"
+             required/>
+
+      <div class="help-block" ng-show="form.password.$invalid && form.password.$dirty"
+           ng-messages="form.password.$error">
+             <div  ng-messages-include="angular/common/_ng-messages.html">
+             </div>
+       </div>
+    </div>
+  </div>
+
+  <span ng-if="includeConfirmation">
+    <div class="form-group" ng-class="vm.error('password_confirmation')">
+      <label class="form-label" for="password_confirmation">Password confirmation</label>
+
+      <div class="controls">
+        <input id="password_confirmation" name="password_confirmation" type="password"
+               ng-model="model.password_confirmation" compare-to="model.password"
+               placeholder="Password confirmation" required/>
+
+        <div class="help-block" ng-show="form.password_confirmation.$invalid && form.password_confirmation.$dirty"
+             ng-messages="form.password_confirmation.$error" >
+             <div ng-messages-include="angular/common/_ng-messages.html">
+             </div>
+               
+        </div>
+      </div>
+    </div>
+  </span>
+</div>

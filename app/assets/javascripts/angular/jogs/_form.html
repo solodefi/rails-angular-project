@@ -1,0 +1,25 @@
+<div class="col-xs-3">
+  <span class="dropdown" is-open="dropdownOpen">
+    <div class="input-group" data-toggle = "dropdown" id="timepickdrop1">
+      <input type="datetime" datetime-converter class="form-control" data-ng-model="jog.start_at" required>
+      <span class="input-group-addon"></span>
+    </div>
+    <ul class="dropdown-menu">
+      <!-- https://github.com/dalelotts/angular-bootstrap-datetimepicker -->
+      <datetimepicker datetime-converter data-ng-model="jog.start_at" data-datetimepicker-config="{ dropdownSelector: '#timepickdrop1' }"/>
+    </ul>
+  </span>
+</div>
+
+<div class="col-xs-2">
+  <input class="form-control" type="decimal" step="0.01" min="0" max="9.99" ng-model="jog.distance" float-converter required>
+</div>
+
+<div class="col-xs-2">
+  <input class="form-control" type="decimal" step="0.01" min="0" max="9.99" ng-model="jog.duration" float-converter required>
+</div>
+
+<div class="col-xs-2">
+  {{ jog.distance / jog.duration | number : 2 }}
+  &nbsp;
+</div>

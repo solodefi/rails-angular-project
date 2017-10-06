@@ -30,10 +30,22 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# CSS libraries
+gem 'twitter-bootstrap-rails'
+
+# JavaScript libraries
+gem 'jquery-rails'
+
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+gem 'angular-rails-templates'
 
 gem "responders"
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -41,6 +53,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  
+  gem 'annotate'
+  gem 'heroku_san'
+  gem 'debase'
 end
 
 group :development do

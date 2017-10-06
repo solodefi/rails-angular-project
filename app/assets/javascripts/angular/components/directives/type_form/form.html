@@ -1,0 +1,14 @@
+<div ng-controller="GenericFormController as vm" class="form-group">
+
+  <div class="form-group">
+    <label class="form-label" for="type">User Type</label>
+
+    <div class="controls">
+      <select ng-model="model.type" ng-init = "model.type = model.type||'regular'" aria-label="Contact method" name="type" id="type">
+        <option value = "regular" ng-selected="1">regular user</option>
+        <option value = "user_manager" >user manager</option>
+        <option value = "administrator" >Administrator</option>
+      </select>
+    </div>
+  </div>
+</div>

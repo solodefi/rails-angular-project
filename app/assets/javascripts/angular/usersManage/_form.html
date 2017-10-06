@@ -1,0 +1,10 @@
+<div class="col-xs-3">
+  <email-form form="form" model="user" ></email-form>
+</div>
+<div class="col-xs-3">
+  <password-form form="form" model="user" include-confirmation="false"></password-form>
+</div>
+
+<div ng-if = "usertype == 'administrator' " class="col-xs-3" >
+  <type-form form="form" model="user"></type-form>
+</div>

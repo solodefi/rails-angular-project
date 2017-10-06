@@ -1,0 +1,44 @@
+<div ng-controller="ReportController as vm">
+
+  <h3>Weekly Reports</h3>
+
+  <div class="panel panel-default col-xs-12">
+    <div class="row panel-heading">
+      <div class="col-xs-2">
+        Statistics by week
+      </div>
+    </div>
+
+    <ul class="list-group">
+      <div class="row panel-heading">
+        <div class="col-xs-3">
+          Week
+        </div>
+        <div class="col-xs-3">
+          Total Distance (Miles)
+        </div>
+        <div class="col-xs-3">
+          Total Time Spent Running (Hours)
+        </div>
+        <div class="col-xs-3">
+          Average Speed (mph)
+        </div>
+      </div>
+      <li ng-repeat="week in vm.weeks | orderBy:'-start_week_millisecond'" class="list-group-item row">
+      <div class="col-xs-3">
+        {{ week.start_week_human }} to {{ week.last_week_human }}
+      </div>
+      <div class="col-xs-3">
+        {{ week.distance_ran | number:2 }}
+      </div>
+      <div class="col-xs-3">
+        {{ week.time_spent_running | number:2 }}
+      </div>
+      <div class="col-xs-3">
+        {{ week.average_speed | number:2 }}
+      </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
